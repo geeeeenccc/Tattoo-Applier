@@ -14,14 +14,15 @@ This project demonstrates how to apply a tattoo image on a person's face using c
 
 The project consists of the following files:
 
-- `main.py`: The main Python script that runs the OpenCV integration with PySimpleGUI.
+- `left_eye.py`: The main Python script that runs the tattoo image applier on the detected eye regions.
 - `haarcascades/haarcascade_frontalface_default.xml`: XML file describing the Haar cascade classifier for detecting faces.
 - `haarcascades/haarcascade_lefteye_2splits.xml`: XML file describing the Haar cascade classifier for detecting eyes.
-- `Love-tattoo.png`: Image file of the mustache to be applied.
+- `images/Love-tattoo.png`, `images/mustache.png`, `images/Tribal-Arm-Tattoo.png`, `images/wave-tattoo.png`: Image file of the tattoo to be applied.
 
 ## Usage
 
-To run the project, make sure you have all the requirements installed. Then, execute the `main.py` script. The GUI window will open, displaying the live video stream from your default camera.
+
+To run the project, make sure you have all the requirements installed. Then, execute the `left_eye.py` script. The GUI window will open, displaying the live video stream from your default camera.
 
 The GUI provides the following options:
 
@@ -33,6 +34,8 @@ The GUI provides the following options:
 You can choose an option and adjust the corresponding sliders to see the effect on the video stream. The GUI window also displays the current frame with the mustache overlay applied to the detected eyes.
 
 To exit the application, click the "Exit" button or close the GUI window.
+
+**Note:** Before running the tattoo applier program, make sure you have a camera connected to your computer. The program relies on the webcam feed for real-time face and eye detection.
 
 ## Notes
 
