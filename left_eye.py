@@ -1,27 +1,31 @@
 import PySimpleGUI as sg
 import cv2
 import numpy as np
-import imutils
-import argparse
-from collections import deque
-
-# XML files describing our haar cascade classifiers
-faceCascadeFilePath = "haarcascades/haarcascade_frontalface_default.xml"
-noseCascadeFilePath = "haarcascades/haarcascade_lefteye_2splits.xml"
-
-# Build our cv2 Cascade Classifiers
-faceCascade = cv2.CascadeClassifier(faceCascadeFilePath)
-eyeCascade = cv2.CascadeClassifier(noseCascadeFilePath)
-
-# Load and configure image (.png with alpha transparency)
-imgTattoo = cv2.imread('images/Love-tattoo.png', -1)
-orig_mask = imgTattoo[:, :, 3]
-orig_mask_inv = cv2.bitwise_not(orig_mask)
-imgTattoo = imgTattoo[:, :, 0:3]
-origTattooHeight, origTattooWidth = imgTattoo.shape[:2]
-
 
 def main():
+    
+    # XML files describing our haar cascade classifiers
+    faceCascadeFilePath = "haarcascades/haarcascade_frontalface_default.xml"
+    noseCascadeFilePath = "haarcascades/haarcascade_lefteye_2splits.xml"
+    
+    # Build our cv2 Cascade Classifiers
+    faceCascade = cv2.CascadeClassifier(faceCascadeFilePath)
+    eyeCascade = cv2.CascadeClassifier(noseCascadeFilePath)
+    
+    # Load and configure image (.png with alpha transparency)
+    image_files = [
+       "images/Love-tattoo.png",
+       "images/wave-tattoo.png",
+       "images/Tribal-Arm-Tattoo.png"
+    ]
+    
+    # Load and configure image (.png with alpha transparency)
+    imgTattoo = cv2.imread(image_files[0], -1)
+    orig_mask = imgTattoo[:, :, 3]
+    orig_mask_inv = cv2.bitwise_not(orig_mask)
+    imgTattoo = imgTattoo[:, :, 0:3]
+    origTattooHeight, origTattooWidth = imgTattoo.shape[:2]
+    
     sg.theme("LightGreen")
 
     # Define the window layout
@@ -62,19 +66,28 @@ def main():
                 key="-ENHANCE SLIDER-",
             ),
         ],
-        [sg.Button("Exit", size=(10, 1))],
+        [sg.Button("Change Image", size=(12, 1)), sg.Button("Exit",  button_color=('red'), size=(10, 1))],
     ]
 
     # Create the window and show it without the plot
     window = sg.Window("OpenCV Integration", layout, location=(800, 400))
 
     cap = cv2.VideoCapture(0)
-
+    selected_image_index = 0
+    
     while True:
         event, values = window.read(timeout=20)
         if event == "Exit" or event == sg.WIN_CLOSED:
             break
 
+        if event == "Change Image":
+            selected_image_index = (selected_image_index + 1) % len(image_files)
+            imgTattoo = cv2.imread(image_files[selected_image_index], -1)
+            orig_mask = imgTattoo[:, :, 3]
+            orig_mask_inv = cv2.bitwise_not(orig_mask)
+            imgTattoo = imgTattoo[:, :, 0:3]
+            origTattooHeight, origTattooWidth = imgTattoo.shape[:2]
+            
         ret, frame = cap.read()
         if not ret:
             break
