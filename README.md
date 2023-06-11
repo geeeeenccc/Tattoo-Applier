@@ -29,6 +29,7 @@ The GUI provides the following options:
 - **Blur**: Applies a blur effect to the video stream. Use the slider to control the intensity of the blur.
 - **Hue**: Adjusts the hue of the video stream. Use the slider to control the hue shift.
 - **Enhance**: Enhances the video stream using contrast-limited adaptive histogram equalization (CLAHE). Use the slider to control the enhancement level.
+- **Change Image**: Changes a tattoo to apply. Click a button to change the tattoo image.
 
 You can choose an option and adjust the corresponding sliders to see the effect on the video stream. The GUI window also displays the current frame with the mustache overlay applied to the detected eyes.
 
