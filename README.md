@@ -8,7 +8,6 @@ This project demonstrates how to apply a tattoo image on a person's face using c
 - PySimpleGUI
 - OpenCV
 - NumPy
-- imutils
 
 ## Project Structure
 
